@@ -29,12 +29,12 @@ jobs:
   
       - name: Fail fast?!
         if: steps.linter.outputs.checks-failed > 0
-        run: echo "Some files failed the linting checks!"
-        # for actual deployment
-        # run: exit 1
+        run: |
+          echo "Some files failed the linting checks!"
+          exit 1
   build:
+    needs: cpp-linter
     runs-on: ubuntu-latest
-
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
